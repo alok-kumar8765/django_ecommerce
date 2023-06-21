@@ -1,0 +1,31 @@
+{% extends "authentication/base.html" %}
+
+{% block title %}
+    Create New Shop
+{% endblock %}
+
+{% block main %}
+    <h1>Shop</h1>
+
+    {% if data_length == 0 %}
+        <p>No orders waiting to respond.</p>
+    {% else %}
+        <p><a href="orders">There are active orders for you to respond</a></p>
+    {% endif %}
+
+    <h2>Items</h2>
+    <p><a href="add-item">Create an item</a></p><br>
+    <div class="row">
+        {% for item in items %}
+            <div class="card" style="width: 18rem;">
+                <img src="{{ item.1.img_url }}" class="card-img-top" alt="{{ item.0.name }}">
+                <div class="card-body">
+                <h5 class="card-title">{{ item.0.name }}</h5>
+                <p class="card-text">{{ item.0.description }}</p>
+                <p class="card-text">${{ item.0.price }}</p>
+                <p class="card-text"><a href="/seller/delete-item?id={{ item.0.id }}">Delete This Item</a></p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
